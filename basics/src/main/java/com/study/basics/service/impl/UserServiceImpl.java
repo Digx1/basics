@@ -5,15 +5,14 @@ import com.study.basics.entity.User;
 import com.study.basics.mapper.UserMapper;
 import com.study.basics.repositeory.UserRepository;
 import com.study.basics.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     
     private final UserRepository userRepository;

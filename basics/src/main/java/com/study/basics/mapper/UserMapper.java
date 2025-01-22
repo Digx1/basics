@@ -3,12 +3,14 @@ package com.study.basics.mapper;
 import com.study.basics.dto.UserDTO;
 import com.study.basics.entity.User;
 
+import java.util.Objects;
+
 public final class UserMapper {
 
 
     public static User mapUserDTOToUser(UserDTO userDTO) {
         return new User(
-                userDTO.getId(),
+                Objects.nonNull(userDTO.getId()) ? userDTO.getId() : null,
                 userDTO.getName(),
                 userDTO.getEmail(),
                 userDTO.getRole()
