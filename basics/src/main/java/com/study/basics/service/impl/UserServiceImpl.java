@@ -6,18 +6,20 @@ import com.study.basics.mapper.UserMapper;
 import com.study.basics.repositeory.UserRepository;
 import com.study.basics.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
-@Service
-@AllArgsConstructor
 public abstract class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {

@@ -1,9 +1,9 @@
 package com.study.basics.service;
 
 import com.study.basics.dto.UserDTO;
-
+import org.springframework.stereotype.Service;
 import java.util.List;
-
+@Service
 public interface UserService {
 
     UserDTO createUser(UserDTO userDTO);

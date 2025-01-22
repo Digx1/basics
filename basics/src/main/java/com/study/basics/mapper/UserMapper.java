@@ -7,7 +7,6 @@ public class UserMapper {
 
 
     public User mapUserDTOToUser(UserDTO userDTO) {
-
         return new User(
                 userDTO.getId(),
                 userDTO.getName(),
