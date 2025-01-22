@@ -16,13 +16,13 @@ public class UserMapper {
         );
 
     }
+
     public UserDTO mapUserToUserDTO(User user) {
         return new UserDTO(
-               user.getId(),
+                user.getId(),
                 user.getName(),
                 user.getEmail(),
                 user.getRole()
-
         );
     }
 }

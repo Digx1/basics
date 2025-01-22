@@ -20,24 +20,24 @@ public class UserController {
     private  UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> CreateUser(UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(UserDTO userDTO) {
      UserDTO savedUser = userService.createUser(userDTO);
      return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
    @GetMapping("{id}")
-   public ResponseEntity<UserDTO> GetUserById(Long id) {
+   public ResponseEntity<UserDTO>getUserById(Long id) {
         UserDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
 
    }
    @GetMapping
-   public ResponseEntity<List<UserDTO>> GetAllUsers() {
+   public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
    }
    @PutMapping("{id}")
-   public ResponseEntity<UserDTO> UpdateUser(Long id, UserDTO userDTO) {
-        UserDTO user = userService.updateUser(id,userDTO);
+   public ResponseEntity<UserDTO> updateUser(Long id, UserDTO userDTO) {
+        UserDTO user = userService.updateUser(userDTO);
         return ResponseEntity.ok(user);
    }
 
