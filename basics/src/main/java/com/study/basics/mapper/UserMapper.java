@@ -3,10 +3,10 @@ package com.study.basics.mapper;
 import com.study.basics.dto.UserDTO;
 import com.study.basics.entity.User;
 
-public class UserMapper {
+public final class UserMapper {
 
 
-    public User mapUserDTOToUser(UserDTO userDTO) {
+    public static User mapUserDTOToUser(UserDTO userDTO) {
         return new User(
                 userDTO.getId(),
                 userDTO.getName(),
@@ -16,7 +16,7 @@ public class UserMapper {
 
     }
 
-    public UserDTO mapUserToUserDTO(User user) {
+    public static UserDTO mapUserToUserDTO(User user) {
         return new UserDTO(
                 user.getId(),
                 user.getName(),

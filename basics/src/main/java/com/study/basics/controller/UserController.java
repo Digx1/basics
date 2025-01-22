@@ -3,6 +3,7 @@ package com.study.basics.controller;
 import com.study.basics.dto.UserDTO;
 import com.study.basics.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,31 +26,36 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @PostMapping
     public ResponseEntity<UserDTO> createUser(UserDTO userDTO) {
-     UserDTO savedUser = userService.createUser(userDTO);
-     return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        UserDTO savedUser = userService.createUser(userDTO);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
-   @GetMapping("{id}")
-   public ResponseEntity<UserDTO>getUserById(Long id) {
+
+    @GetMapping("{id}")
+    public ResponseEntity<UserDTO> getUserById(Long id) {
         UserDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
 
-   }
-   @GetMapping
-   public ResponseEntity<List<UserDTO>> getAllUsers() {
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
-   }
-   @PutMapping("{id}")
-   public ResponseEntity<UserDTO> updateUser(Long id, UserDTO userDTO) {
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<UserDTO> updateUser(Long id, UserDTO userDTO) {
         UserDTO user = userService.updateUser(userDTO);
         return ResponseEntity.ok(user);
-   }
-   @DeleteMapping
-   public ResponseEntity<String> deleteUserById(Long id){
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteUserById(Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok("user deleted");
-   }
+    }
 
 }
