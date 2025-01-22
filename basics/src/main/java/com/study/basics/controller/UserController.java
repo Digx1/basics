@@ -41,7 +41,7 @@ public class UserController {
         return ResponseEntity.ok(user);
    }
 
-   public ResponseEntity<String> DeleteUserById(Long id){
+   public ResponseEntity<String> deleteUserById(Long id){
         userService.deleteUserById(id);
         return ResponseEntity.ok("user deleted");
    }
