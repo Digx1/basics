@@ -17,7 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public abstract class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
@@ -31,7 +31,6 @@ public abstract class UserServiceImpl implements UserService {
     public UserDTO getUserById(Long id) {
         UserMapper userMapper = new UserMapper();
         User user = userRepository.findById(id).orElse(null);
-        List<User> users = new ArrayList<User>();
         return userMapper.mapUserToUserDTO(user);
     }
 
