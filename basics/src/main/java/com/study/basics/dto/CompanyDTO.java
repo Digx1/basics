@@ -1,7 +1,7 @@
 package com.study.basics.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,12 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserDTO {
-    
+@Builder
+public class CompanyDTO {
     private Long id;
     private String name;
-    private String email;
-    private String role;
-    private Long companyId;
-    private CompanyDTO companyDTO;
+    private String domain;
+
 }

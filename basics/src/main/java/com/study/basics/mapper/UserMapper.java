@@ -1,5 +1,6 @@
 package com.study.basics.mapper;
 
+import com.study.basics.dto.CompanyDTO;
 import com.study.basics.dto.UserDTO;
 import com.study.basics.entity.User;
 
@@ -10,7 +11,7 @@ public final class UserMapper {
 
     public static User mapUserDTOToUser(UserDTO userDTO) {
         return new User(
-                Objects.nonNull(userDTO.getId()) ? userDTO.getId() : null,
+                userDTO.getId(),
                 userDTO.getName(),
                 userDTO.getEmail(),
                 userDTO.getRole()
@@ -23,7 +24,19 @@ public final class UserMapper {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getRole()
+                user.getRole(),
+                Objects.nonNull(user.getCompany()) ? user.getCompany().getId() : null,
+                null
+        );
+    }
+    public static UserDTO mapUserToUserDTOWithCompany(User user, CompanyDTO companyDTO) {
+        return new UserDTO(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole(),
+                Objects.nonNull(user.getCompany()) ? user.getCompany().getId() : null,
+                companyDTO
         );
     }
 }
