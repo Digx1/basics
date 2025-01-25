@@ -11,6 +11,7 @@ import com.study.basics.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +21,7 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-    
+
     private final UserRepository userRepository;
     private final CompanyService companyService;
 
@@ -35,8 +36,8 @@ public class UserServiceImpl implements UserService {
         Company company = null;
         try {
             company = companyService.getCompanyById(userDTO.getCompanyId());
-        } catch (Exception exception)  {
-          log.error("Company not found");
+        } catch (Exception exception) {
+            log.error("Company not found");
         }
 
         if (Objects.isNull(company)) {
@@ -49,11 +50,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserById(Long id) throws Exception {
-        User user = userRepository.findById(id).orElse(null);
-        UserDTO userDTO = UserMapper.mapUserToUserDTO(user);
-        Company company= companyService.getCompanyById(userDTO.getCompanyId());
-           CompanyDTO companyDTO = companyService.mapToCompanyDTO(company);
-        return UserMapper.mapUserToUserDTOWithCompany(user,companyDTO);
+        User user = null;
+        CompanyDTO companyDTO = null;
+        try {
+            user = userRepository.findById(id).orElse(null);
+        } catch (Exception exception) {
+            log.error("user not found");
+        }
+
+        if(Objects.isNull(user)){
+         return null;
+        }
+
+        UserDTO userDTO = UserMapper.mapUserToUserDTO(Objects.requireNonNull(user));
+        Company company = companyService.getCompanyById(userDTO.getCompanyId());
+        companyDTO = companyService.mapToCompanyDTO(company);
+        return UserMapper.mapUserToUserDTOWithCompany(user, companyDTO);
     }
 
     @Override
@@ -62,17 +74,17 @@ public class UserServiceImpl implements UserService {
         List<UserDTO> allUserDTOs = new ArrayList<>();
         for (int i = 0; i < allUsers.size(); i++) {
             User user = allUsers.get(i);
-            UserDTO userDTO  =UserMapper.mapUserToUserDTO(user);
-             Company company = companyService.getCompanyById(userDTO.getCompanyId());
-             CompanyDTO companyDTO = companyService.mapToCompanyDTO(company);
+            UserDTO userDTO = UserMapper.mapUserToUserDTO(user);
+            Company company = companyService.getCompanyById(userDTO.getCompanyId());
+            CompanyDTO companyDTO = companyService.mapToCompanyDTO(company);
 
-            allUserDTOs.add(UserMapper.mapUserToUserDTOWithCompany(user,companyDTO));
+            allUserDTOs.add(UserMapper.mapUserToUserDTOWithCompany(user, companyDTO));
         }
         return allUserDTOs;
     }
 
     @Override
-    public UserDTO updateUser(Long id ,UserDTO updatedUser) throws Exception {
+    public UserDTO updateUser(Long id, UserDTO updatedUser) throws Exception {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isPresent()) {
