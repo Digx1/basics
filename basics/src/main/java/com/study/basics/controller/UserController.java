@@ -1,6 +1,7 @@
 package com.study.basics.controller;
 
 import com.study.basics.dto.UserDTO;
+import com.study.basics.dto.UserSearchRequest;
 import com.study.basics.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Long id) throws Exception {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Long id) throws RuntimeException {
         UserDTO user = userService.getUserById(id);
         return ResponseEntity.ok(user);
 
@@ -59,4 +61,14 @@ public class UserController {
         return ResponseEntity.ok("user deleted");
     }
 
+    @GetMapping(path ="/search")
+    public ResponseEntity<List<UserDTO>> searchUsers(@RequestBody UserSearchRequest userSearchRequest){
+       List<UserDTO> users  = userService.searchUsers(userSearchRequest);
+       return  ResponseEntity.ok(users);
+    }
+    @GetMapping(path ="/search/v2" )
+    public ResponseEntity<List<UserDTO>> searchUsersV2 (@RequestBody List<UserSearchRequest> userSearchRequests, @RequestParam(required = false) boolean isAndOperator){
+        return ResponseEntity.ok(userService.searchUsers(userSearchRequests));
+    }
 }
+

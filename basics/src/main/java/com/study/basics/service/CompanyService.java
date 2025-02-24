@@ -8,7 +8,7 @@ import java.util.List;
 public interface CompanyService {
      CompanyDTO createCompany(CompanyDTO companyDTO);
      CompanyDTO getCompanyDTOById(Long id) throws Exception;
-     Company getCompanyById(Long id) throws Exception;
+     Company getCompanyById(Long id) throws RuntimeException;
      CompanyDTO updateCompany(Long id,CompanyDTO updatedCompany);
      List<CompanyDTO> getAllCompany();
      void deleteById(Long id);
