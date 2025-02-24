@@ -1,14 +1,17 @@
 package com.study.basics.service;
 
-import com.study.basics.dto.UserDTO;
+import  com.study.basics.dto.UserDTO;
+import com.study.basics.dto.UserSearchRequest;
 
 import java.util.List;
 
 public interface UserService {
 
     UserDTO createUser(UserDTO userDTO);
-    UserDTO getUserById(Long id);
-    List<UserDTO> getAllUsers();
-    UserDTO updateUser(UserDTO updatedUser);
+    UserDTO getUserById(Long id) throws RuntimeException;
+    List<UserDTO> getAllUsers() throws Exception;
+    UserDTO updateUser(Long id,UserDTO updatedUser) throws Exception;
     void deleteUserById(Long id);
+    List<UserDTO> searchUsers(UserSearchRequest userSearchRequest);
+    List<UserDTO> searchUsers(List<UserSearchRequest> userSearchRequests);
 }
